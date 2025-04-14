@@ -1,10 +1,15 @@
 import express from 'express'
+import Resources from './models/db'
 const app = express()
 
 app.post('/resources',(req,res)=>{
-    res.send("hello")
+    const title = req.
 })
 
-app.listen(()=>{
+app.get('/resources',(req,res)=>{
+
+})
+
+app.listen(3000,()=>{
     console.log("App listing on port")
 })
