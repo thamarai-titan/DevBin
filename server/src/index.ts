@@ -3,7 +3,7 @@ import Resources from './models/db'
 const app = express()
 
 app.post('/resources',(req,res)=>{
-    const title = req.
+    
 })
 
 app.get('/resources',(req,res)=>{
