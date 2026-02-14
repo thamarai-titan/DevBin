@@ -15,8 +15,43 @@ datasource db {
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
+  id        String     @id @default(uuid())
   email     String   @unique
   name      String?
+  createdAt DateTime @default(now())
+
+  savedTools SavedTools[]
+}
+
+
+model Tool {
+  id  String @id @default(uuid())
+  title String
+  description String
+  url String
+  image String?
+  createdAt DateTime @default(now())
+  categoryId String
+  category Category @relation(fields: [categoryId], references: [id])
+
+  savedTools SavedTools[]
+}
+
+model Category {
+  id String @id @default(uuid())
+  name String @unique
+  createdAt DateTime @default(now())
+
+  tools Tool[]
+}
+
+model SavedTools {
+  id String @id @default(uuid())
+  userId String @unique
+  user User @relation(fields: [userId], references: [id])
+  
+  toolId String @unique
+  tool Tool @relation(fields: [toolId], references: [id])
+
   createdAt DateTime @default(now())
 }
