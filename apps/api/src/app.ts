@@ -1,6 +1,7 @@
 import express from "express"
 import type { Request, Response } from "express"
 import cors from "cors"
+import authRouter from "./modules/auth/auth.routes.ts"
 
 const app = express()
 
@@ -15,5 +16,7 @@ app.get("/", (req: Request, res: Response)=>{
         message: "Server is running"
     })
 })
+
+app.use("/api", authRouter)
 
 export default app
