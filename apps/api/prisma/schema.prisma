@@ -18,9 +18,10 @@ model User {
   id        String     @id @default(uuid())
   email     String   @unique
   name      String?
+  password  String
   createdAt DateTime @default(now())
 
-  savedTools SavedTools[]
+  savedTools SavedTool[]
 }
 
 
@@ -34,7 +35,7 @@ model Tool {
   categoryId String
   category Category @relation(fields: [categoryId], references: [id])
 
-  savedTools SavedTools[]
+  savedTools SavedTool[]
 }
 
 model Category {
@@ -45,13 +46,15 @@ model Category {
   tools Tool[]
 }
 
-model SavedTools {
+model SavedTool {
   id String @id @default(uuid())
-  userId String @unique
+  userId String 
   user User @relation(fields: [userId], references: [id])
   
-  toolId String @unique
+  toolId String 
   tool Tool @relation(fields: [toolId], references: [id])
 
   createdAt DateTime @default(now())
+
+  @@unique([userId, toolId])
 }
