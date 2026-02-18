@@ -1,5 +1,5 @@
 import type { Request, Response } from "express"
-import { RegisterSchema, type RegisterType } from "./auth.schema"
+import { LoginSchema, RegisterSchema, type LoginType, type RegisterType } from "./auth.schema"
 import { checkEmail, RegisterService } from "./auth.service"
 import { responses } from "../../lib/responses"
 
@@ -15,6 +15,19 @@ export const RegisterController = async (req:Request, res:Response)=> {
 
         res.status(201).json(responses.success(user))
 
+    } catch (error: any) {
+        if(error.name === "ZodError"){
+            res.status(400).json(responses.error("Zod Validation Error"))
+        }
+
+        res.status(500).json(responses.error("Internal Server Error"))
+    }
+}
+
+export const LoginController = async (req:Request, res:Response) => {
+    try {
+        const data: LoginType = LoginSchema.parse(req.body)
+        
     } catch (error) {
         
     }
