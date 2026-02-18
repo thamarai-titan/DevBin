@@ -1,6 +1,6 @@
 import type { Request, Response } from "express"
 import { LoginSchema, RegisterSchema, type LoginType, type RegisterType } from "./auth.schema"
-import { checkEmail, RegisterService } from "./auth.service"
+import { checkEmail, LoginService, RegisterService } from "./auth.service"
 import { responses } from "../../lib/responses"
 
 export const RegisterController = async (req:Request, res:Response)=> {
@@ -27,7 +27,8 @@ export const RegisterController = async (req:Request, res:Response)=> {
 export const LoginController = async (req:Request, res:Response) => {
     try {
         const data: LoginType = LoginSchema.parse(req.body)
-        
+
+        const user = await LoginService(data);
     } catch (error) {
         
     }
