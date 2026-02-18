@@ -1,5 +1,5 @@
 import { prisma } from "../../lib/prisma";
-import type { RegisterType } from "./auth.schema";
+import type { LoginType, RegisterType } from "./auth.schema";
 import bcrypt from "bcrypt";
 
 export const checkEmail = async (email: string) => {
@@ -44,3 +44,33 @@ export const RegisterService = async (data: RegisterType) => {
     throw error;
   }
 };
+
+
+export const LoginService = async (data: LoginType) => {
+  try {
+    const {
+      email,
+      password
+    } = data
+
+    const user = await prisma.user.findUnique({
+      where: {
+        email,
+      }
+    })
+
+    if(!user){
+      throw new Error("NO_USER_FOUND")
+    }
+
+    const decodedPassword = await bcrypt.compare(password, user.password)
+
+    if(decodedPassword){
+        throw new Error("PASSWORD_NOT_MATCH")
+    }
+
+    return user
+  } catch (error) {
+    throw error
+  }
+} 
