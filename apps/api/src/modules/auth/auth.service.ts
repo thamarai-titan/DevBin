@@ -32,6 +32,11 @@ export const RegisterService = async (data: RegisterType) => {
         email: email,
         password: hashedPassword,
       },
+      select: {
+        id: true,
+        name: true,
+        email: true
+      }
     });
 
     return user;
