@@ -2,6 +2,7 @@ import type { Request, Response } from "express"
 import { LoginSchema, RegisterSchema, type LoginType, type RegisterType } from "./auth.schema"
 import { checkEmail, LoginService, RegisterService } from "./auth.service"
 import { responses } from "../../lib/responses"
+import { SignJwt } from "../../lib/utils"
 
 export const RegisterController = async (req:Request, res:Response)=> {
     try {
@@ -29,7 +30,28 @@ export const LoginController = async (req:Request, res:Response) => {
         const data: LoginType = LoginSchema.parse(req.body)
 
         const user = await LoginService(data);
-    } catch (error) {
-        
+
+        const token = await SignJwt({
+            userId: user.id,
+            role: user.role
+        })
+
+        return res.status(200).json(responses.success({
+            token
+        }))
+    } catch (error: any) {
+        if(error.name === "ZodError"){
+            return res.status(400).json(responses.error("INVALID_REQUEST"))
+        }
+
+        if(error.message === "NO_USER_FOUND"){
+            return res.status(401).json(responses.error("NO_USER_FOUND"))
+        }
+
+        if(error.message === "INVALID_CREDENTIALS"){
+           return res.status(401).json(responses.error("INVALID_CREDENTIALS"))
+        }
+
+        return res.status(500).json(responses.error("INTERNEL_SERVER_ERROR"))
     }
 }
