@@ -65,8 +65,8 @@ export const LoginService = async (data: LoginType) => {
 
     const decodedPassword = await bcrypt.compare(password, user.password)
 
-    if(decodedPassword){
-        throw new Error("PASSWORD_NOT_MATCH")
+    if(!decodedPassword){
+        throw new Error("INVALID_CREDENTIALS")
     }
 
     return user
