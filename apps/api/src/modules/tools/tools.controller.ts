@@ -86,7 +86,7 @@ export const DeleteToolController = async (
   res: Response,
 ) => {
   try {
-    const toolId = req.params.toolId;
+    const toolId = req.params.toolId as string;
 
     const tool = await DeleteToolService(toolId);
 
@@ -111,15 +111,14 @@ export const SaveToolController = async (
   res: Response,
 ) => {
   try {
-    const toolId = req.params.toolId;
+    const toolId = req.params.toolId as string;
     const userId = req.userId;
 
     const savedTool = await SaveToolService(toolId, userId);
 
     res.status(200).json({
-      "message": "Tool saved successfully"
+      message: "Tool saved successfully",
     });
-
   } catch (error: any) {
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
       if (error.code === "P2003") {
@@ -141,9 +140,8 @@ export const UnsaveToolController = async (
     const savedTool = await UnsaveToolService(toolId, userId);
 
     res.status(200).json({
-      "message" : "Tool Removed from saved list"
+      message: "Tool Removed from saved list",
     });
-
   } catch (error: any) {
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
       if (error.code === "P2003") {
@@ -154,3 +152,25 @@ export const UnsaveToolController = async (
   }
 };
 
+export const GetAllSavedToolsController = async (
+  req: Request,
+  res: Response,
+) => {
+  try {
+    const savedTools = await GetallToolsService();
+
+    res.status(200).json(
+      responses.success({
+        savedTools,
+      }),
+    );
+  } catch (error: any) {
+    if (error instanceof Prisma.PrismaClientKnownRequestError) {
+      if (error.code === "P2025") {
+        return res.status(404).json(responses.error("TOOL_NOT_FOUND"));
+      }
+    }
+
+    return res.status(500).json(responses.error("INTERNAL_SERVER_ERROR"));
+  }
+};
