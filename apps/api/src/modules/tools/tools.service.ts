@@ -104,3 +104,11 @@ export const UnsaveToolService = async (toolId: string, userId: string) => {
         throw error
     }
 }
+
+export const GetAllSavedToolsService = async () => {
+    try {
+        const savedTools = await prisma.savedTool.findMany()
+    } catch (error) {
+        throw error
+    }
+}
