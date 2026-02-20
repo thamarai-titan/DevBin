@@ -11,7 +11,7 @@ declare global {
     }
 }
 
-export const verifyToken = async (req: Request, res: Response, next: NextFunction)=>{
+export const verifyToken = (req: Request, res: Response, next: NextFunction)=>{
     const authToken = req.headers.authorization;
 
     if(!authToken || !authToken.startsWith("Bearer")){
@@ -32,4 +32,12 @@ export const verifyToken = async (req: Request, res: Response, next: NextFunctio
     } catch (error) {
         return res.status(401).json(responses.error("UNAUTHORIZED"))
     }
+}
+
+export const verifyAdmin = (req: Request, res: Response, next: NextFunction) => {
+    const role = req.role
+    if(role !== "admin"){
+        return res.status(400).json(responses.error("UNAUTHORIZED"))
+    }
+    next()
 }
