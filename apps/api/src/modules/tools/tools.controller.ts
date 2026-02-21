@@ -10,7 +10,8 @@ import {
 import { responses } from "../../lib/responses";
 import { ToolSchema, type ToolType } from "./tools.schema";
 import { Prisma } from "@prisma/client";
-interface Params {
+
+type Params = {
   toolId: string;
 }
 
