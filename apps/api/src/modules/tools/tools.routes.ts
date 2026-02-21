@@ -18,7 +18,7 @@ router.post("/tools", verifyToken,verifyAdmin,CreatetoolController);
 
 router.delete("/tools/:id", verifyToken, verifyAdmin,  DeleteToolController);
 router.post("/saved", verifyToken, SaveToolController);
-router.delete("/saved/:toolId", UnsaveToolController);
-router.get("/saved", GetallToolsController);
+router.delete("/saved/:toolId",verifyToken, UnsaveToolController);
+router.get("/saved",verifyToken, GetallToolsController);
 
 export default router;
