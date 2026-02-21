@@ -3,6 +3,7 @@ import type { Request, Response } from "express"
 import cors from "cors"
 import authRouter from "./modules/auth/auth.routes.ts"
 import toolsRouter from "./modules/tools/tools.routes.ts"
+import userRouter from "./modules/user/user.routes.ts"
 
 const app = express()
 
@@ -20,5 +21,6 @@ app.get("/", (req: Request, res: Response)=>{
 
 app.use("/api", authRouter)
 app.use("/api", toolsRouter)
+app.use("/api", userRouter)
 
 export default app
