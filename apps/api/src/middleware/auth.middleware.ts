@@ -19,7 +19,7 @@ export const verifyToken = (req: Request, res: Response, next: NextFunction)=>{
     }
 
     const token = authToken.split(" ")[1] as string
-
+    console.log(token)
     try {
         const decoded = jwt.verify(token, process.env.SECRET_KEY!) as {
             userId: string,
@@ -28,7 +28,7 @@ export const verifyToken = (req: Request, res: Response, next: NextFunction)=>{
         req.userId = decoded.userId
         req.role = decoded.role
         next()
-
+        
     } catch (error) {
         return res.status(401).json(responses.error("UNAUTHORIZED"))
     }
@@ -36,6 +36,7 @@ export const verifyToken = (req: Request, res: Response, next: NextFunction)=>{
 
 export const verifyAdmin = (req: Request, res: Response, next: NextFunction) => {
     const role = req.role
+    console.log(role)
     if(role !== "admin"){
         return res.status(400).json(responses.error("UNAUTHORIZED"))
     }
