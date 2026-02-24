@@ -18,9 +18,9 @@ export const RegisterController = async (req:Request, res:Response)=> {
 
     } catch (error: any) {
         if(error.name === "ZodError"){
-            res.status(400).json(responses.error("Zod Validation Error"))
+            return res.status(400).json(responses.error("Zod Validation Error"))
         }
-
+        
         res.status(500).json(responses.error("Internal Server Error"))
     }
 }
