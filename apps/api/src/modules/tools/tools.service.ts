@@ -72,6 +72,7 @@ export const DeleteToolService = async (toolId: string) => {
 
 export const SaveToolService = async (toolId: string, userId: string) => {
 try {
+    console.log(toolId)
     const savedTool = await prisma.savedTool.create({
         data : {
             user: {
