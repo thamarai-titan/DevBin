@@ -22,7 +22,7 @@ export const checkEmail = async (email: string) => {
 
 export const RegisterService = async (data: RegisterType) => {
   try {
-    const { username, email, password } = data;
+    const { username, email, password, role } = data;
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
@@ -31,15 +31,18 @@ export const RegisterService = async (data: RegisterType) => {
         name: username,
         email: email,
         password: hashedPassword,
+        role: role || "user"
       },
       select: {
         id: true,
         name: true,
-        email: true
+        email: true,
+        role: true
       }
     });
 
     return user;
+
   } catch (error) {
     throw error;
   }
@@ -65,9 +68,7 @@ export const LoginService = async (data: LoginType) => {
 
     const decodedPassword = await bcrypt.compare(password, user.password)
 
-    if(!decodedPassword){
-        throw new Error("INVALID_CREDENTIALS")
-    }
+
 
     return user
   } catch (error) {
