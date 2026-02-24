@@ -108,11 +108,12 @@ export const DeleteToolController = async (
 };
 
 export const SaveToolController = async (
-  req: Request<Params>,
+  req: Request,
   res: Response,
 ) => {
   try {
-    const toolId = req.params.toolId as string;
+    const { toolId } = req.body
+    console.log(toolId)
     const userId = req.userId;
 
     const savedTool = await SaveToolService(toolId, userId);
