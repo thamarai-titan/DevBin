@@ -1,5 +1,23 @@
 import type { Metadata } from "next";
 import "./global.css"
+import { Raleway } from 'next/font/google';
+import { Permanent_Marker } from 'next/font/google'
+
+
+
+
+const raleway = Raleway({
+  subsets: ['latin'],
+  display: 'swap', 
+  weight: ['400', '700'], 
+  variable: '--font-raleway',
+});
+
+const permanentMarker = Permanent_Marker({
+  subsets: ['latin'],
+  weight: ['400'],
+  variable: '--font-marker',
+});
 
 export const metadata: Metadata = {
   title: "DevBin",
@@ -12,8 +30,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body suppressHydrationWarning>
+    <html lang="en" className={`${raleway.className} ${permanentMarker.variable}`}>
+      <body suppressHydrationWarning >
         {children}
       </body>
     </html>
