@@ -21,3 +21,4 @@ export const pageLeave = (container: Element) => {
     duration: 0.4,
     ease: 'power3.in',
   })
+}
