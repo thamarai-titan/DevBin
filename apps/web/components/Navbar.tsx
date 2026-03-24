@@ -1,24 +1,43 @@
 "use client"
 
 import { Menu, X } from "lucide-react"
-import { motion, AnimatePresence } from "motion/react"
-import { useState } from "react";
+import { motion,useScroll,useMotionValueEvent,AnimatePresence } from "motion/react";
+import { useEffect,useState } from "react";
+import { navVariants } from "@/lib/framer/variants";
+
 
 
 export const Navbar = () => {
 
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const navItems = ["HOME","TOOLS", "POPULAR", "RECOMMAND"]
+
+    const {scrollY} = useScroll();
+    const [navState,setNavState] = useState("full");
+
+    useMotionValueEvent(scrollY,"change",(latest)=>{
+        if(latest < 100){
+            setNavState("full")
+        }
+        else {
+            setNavState("hidden")
+        }
+    })
+
     return (
         <div>
-            <nav className="w-full z-50 p-10 top-0 fixed">
+            <motion.nav 
+            initial="full"
+            variants={navVariants}
+            animate={navState}
+            transition={{duration: 0.6,ease: "easeInOut"}}
+            
+            className=" z-50 p-10 top-0 fixed">
                 <motion.div
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    whileHover={{ scale: 1.1 }}
-                    className="max-w-7xl mx-auto rounded-md border border-gray-300 w-40 p-3 flex justify-between items-center shadow-(--shadow-card)">
+                
+                    className="max-w-7xl mx-auto rounded-md border border-gray-300 p-3 flex justify-between items-center shadow-(--shadow-card)">
                     <div className="text-md font-bold">
-                        DevBin.
+                        Dev<span className="">B</span>in.
                     </div>
                     <motion.div
                     whileHover= {{rotate: 270}}
@@ -28,7 +47,7 @@ export const Navbar = () => {
                     </motion.div>
                 </motion.div>
 
-            </nav>
+            </motion.nav>
             <AnimatePresence>
             {isOpen && (
                 <div className="w-full z-50 top-0 left-0 fixed">
