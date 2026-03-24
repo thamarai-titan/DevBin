@@ -9,26 +9,3 @@
   font-weight: 400;
   font-style: normal;
 }
-
-
-:root {
-  --bg-hero: repeating-linear-gradient(
-      135deg,
-      rgba(4, 229, 71, 0.08) 0px,
-      rgba(4, 229, 71, 0.08) 1px,
-      transparent 1px,
-      transparent 9px
-    ),
-    repeating-linear-gradient(
-      45deg,
-      rgba(4, 229, 71, 0.08) 0px,
-      rgba(4, 229, 71, 0.08) 1px,
-      transparent 1px,
-      transparent 9px
-    ),
-    linear-gradient(90deg, rgb(77, 18, 84), rgb(52, 161, 185));
-}
-
-.bg-hero {
-  background-image: var(--bg-hero);
-}
