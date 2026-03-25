@@ -1,100 +1,118 @@
 "use client"
 
 import { Menu, X } from "lucide-react"
-import { motion,useScroll,useMotionValueEvent,AnimatePresence } from "motion/react";
-import { useEffect,useState } from "react";
-import { navVariants } from "@/lib/framer/variants";
+import { motion, useScroll, useMotionValueEvent, AnimatePresence } from "motion/react"
+import { useState } from "react"
+import { navVariants } from "@/lib/framer/variants"
 
-
+const navItems = [
+  { label: "HOME",      num: "01" },
+  { label: "TOOLS",     num: "02" },
+  { label: "POPULAR",   num: "03" },
+  { label: "RECOMMEND", num: "04" },
+]
 
 export const Navbar = () => {
+  const [isOpen, setIsOpen] = useState(false)
+  const { scrollY } = useScroll()
+  const [navState, setNavState] = useState("full")
 
-    const [isOpen, setIsOpen] = useState<boolean>(false);
-    const navItems = ["HOME","TOOLS", "POPULAR", "RECOMMAND"]
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    setNavState(latest < 100 ? "full" : "hidden")
+  })
 
-    const {scrollY} = useScroll();
-    const [navState,setNavState] = useState("full");
+  return (
+    <>
+      {/* ── NAV BAR ── */}
+      <motion.nav
+        initial="full"
+        variants={navVariants}
+        animate={navState}
+        transition={{ duration: 0.6, ease: "easeInOut" }}
+        className="fixed top-0 z-50 w-full px-8"
+      >
+        <div className="flex items-center justify-between border border-(--color-border) backdrop-blur-xl px-6 py-3.5 rounded-lg">
+          
+          {/* logo */}
+          <span className="font-syne text-[17px] font-extrabold tracking-tight text-[#f5f2ff]">
+            Dev<span className="">B</span>in.
+          </span>
 
-    useMotionValueEvent(scrollY,"change",(latest)=>{
-        if(latest < 100){
-            setNavState("full")
-        }
-        else {
-            setNavState("hidden")
-        }
-    })
-
-    return (
-        <div>
-            <motion.nav 
-            initial="full"
-            variants={navVariants}
-            animate={navState}
-            transition={{duration: 0.6,ease: "easeInOut"}}
-            
-            className=" z-50 p-10 top-0 fixed">
-                <motion.div
-                
-                    className="max-w-7xl mx-auto rounded-md border border-gray-300 p-3 flex justify-between items-center shadow-(--shadow-card)">
-                    <div className="text-md font-bold">
-                        Dev<span className="">B</span>in.
-                    </div>
-                    <motion.div
-                    whileHover= {{rotate: 270}}
-                    transition={{duration: 0.3}}
-                    >
-                        <Menu className="w-5" onClick={() => setIsOpen(!isOpen)} />
-                    </motion.div>
-                </motion.div>
-
-            </motion.nav>
-            <AnimatePresence>
-            {isOpen && (
-                <div className="w-full z-50 top-0 left-0 fixed">
-                    <motion.div
-                        initial={{ y: -1000, opacity: 0 }}
-                        animate={{ y: 0, opacity: 1 }}
-                        exit={{ y: -1000, opacity: 0 }}
-                        transition={{ duration: 0.5, ease: "easeInOut"  }}
-                        className="max-w-full h-screen bg-(--color-primary) p-12">
-                        <div className="flex justify-between text-white">
-                            <div className="text-xl font-bold">
-
-                            </div>
-                            <motion.div
-                            whileHover={{rotate: 180}}
-                            transition={{duration: 0.5}}
-                            >
-                                <X
-                                    className="w-10 rounded  h-10"
-                                    onClick={() => setIsOpen(!isOpen)}
-                                />
-                            </motion.div>
-                        </div>
-                        <div className="text-white flex items-center justify-center h-full">
-                            <motion.ul
-                                className="text-3xl font-bold">
-                                {
-                                    navItems.map((item, index) => (
-                                        <motion.li key={index}
-                                            initial={{opacity: 0, y: -300, color: "white"}}
-                                            whileInView={{opacity: 1, y: 0}}
-                                            transition={{duration: 0.4, ease: "easeInOut"}}
-                                            whileHover={{color: "#6D28D9"}}
-                                            animate={{opacity: 1}}
-                                            exit={{opacity:0, y: -300, color: "white"}}
-                                        >
-                                            {item}
-                                        </motion.li>
-                                    ))
-                                }
-                            </motion.ul>
-                        </div>
-
-                    </motion.div>
-                </div>
-            )}
-            </AnimatePresence>
+          {/* right side */}
+          <div className="flex items-center gap-5">
+            <span className="font-mono text-[9px] tracking-[2px] uppercase text-(--color-text)">
+              Menu
+            </span>
+            <motion.button
+              whileHover={{ borderColor: "#f6fa1a", backgroundColor: "#6D28D910" }}
+              transition={{ duration: 0.2 }}
+              onClick={() => setIsOpen(true)}
+              className="w-9 h-9 flex items-center justify-center border border-(--color-border) rounded cursor-pointer bg-transparent"
+            >
+              <Menu size={15} className="text-(--color-text)" />
+            </motion.button>
+          </div>
         </div>
-    )
+      </motion.nav>
+
+      {/* ── FULLSCREEN OVERLAY ── */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 z-100 bg-(--color-bg) flex flex-col p-10"
+          >
+            {/* top row */}
+            <div className="flex justify-between items-center mb-16">
+              <span className="font-syne text-[17px] font-extrabold text-(--color-text)">
+                Dev<span className="">B</span>in.
+              </span>
+              <motion.button
+                whileHover={{ borderColor: "#f6fa1a" }}
+                onClick={() => setIsOpen(false)}
+                className="w-10 h-10 flex items-center justify-center border border-(--color-border) rounded bg-transparent cursor-pointer"
+              >
+                <X size={16} className="text-(--color-text)" />
+              </motion.button>
+            </div>
+
+            {/* nav items */}
+            <ul className="flex-1 flex flex-col justify-center gap-0">
+              {navItems.map((item, i) => (
+                <motion.li
+                  key={item.label}
+                  initial={{ opacity: 0, x: -40 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -40 }}
+                  transition={{ duration: 0.35, delay: i * 0.07, ease: "easeOut" }}
+                  onClick={() => setIsOpen(false)}
+                  className="group flex items-baseline gap-4 py-4 border-b border-(--color-border) cursor-pointer hover:pl-3 transition-all duration-300"
+                >
+                  <span className="font-mono text-[10px] tracking-[1.5px] text-(--color-muted)">
+                    {item.num}
+                  </span>
+                  <span className="font-syne text-5xl font-extrabold tracking-[-2px] text-(--color-text) group-hover:text-(--color-accent) transition-colors duration-200 leading-none">
+                    {item.label}
+                  </span>
+                </motion.li>
+              ))}
+            </ul>
+
+            {/* footer */}
+            <div className="flex justify-between items-end mt-10">
+              <span className="font-mono text-[9px] tracking-[2px] uppercase text-(--color-muted)">
+                DevBin © 2026
+              </span>
+              <span className="font-mono text-[9px] tracking-[2px] uppercase text-(--color-muted)">
+                Most useful dev tools
+              </span>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
+  )
 }
