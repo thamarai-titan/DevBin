@@ -9,3 +9,25 @@
   font-weight: 400;
   font-style: normal;
 }
+
+@keyframes drift {
+  0%   { background-position: 0% 50%;   transform: scale(1.05); }
+  25%  { background-position: 50% 80%;  transform: scale(1.08); }
+  50%  { background-position: 100% 50%; transform: scale(1.05); }
+  75%  { background-position: 50% 20%;  transform: scale(1.1); }
+  100% { background-position: 0% 50%;   transform: scale(1.05); }
+}
+
+.hero-bg {
+  animation: drift 16s ease-in-out infinite;
+  background-size: 160% 160%;
+}
+
+:root {
+  --color-bg:       #0a0812;   /* page background */
+  --color-card:     #0f0c18;   /* card surface */
+  --color-border:   #1a1624;   /* all borders */
+  --color-muted:    #6b5f8a;   /* descriptions, secondary text */
+  --color-text:     #f5f0ff;   /* headings, primary text */
+  --color-accent:   #f6fa1a;   /* THE yellow — buttons, eyebrows, highlights */
+}
