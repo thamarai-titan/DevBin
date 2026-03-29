@@ -56,7 +56,7 @@ export const HeroSection = () => {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: 0.2 }}
-                    className="text-(--color-muted) text-sm leading-relaxed max-w-md font-light mb-12"
+                    className="text-(--color-muted) text-sm leading-relaxed max-w-md font-light mb-5"
                 >
                     Ever wondered what's really powering your favorite websites?
                     Dive into the tools, technologies, and platforms
@@ -68,7 +68,7 @@ export const HeroSection = () => {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.6, delay: 0.3 }}
-                    className="flex gap-10 mb-12"
+                    className="flex gap-10 mb-5"
                 >
                     {[
                         { val: "320+", label: "Tools" },
@@ -90,7 +90,7 @@ export const HeroSection = () => {
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: 0.4 }}
-                    className="flex items-center gap-8"
+                    className="flex items-center gap-8 pt-2 "
                 >
                     <button className="font-mono text-[11px] tracking-[1.5px] uppercase bg-[#c8cc00] text-(--color-border) px-7 py-3.5 rounded hover:opacity-85 transition-opacity">
                         Explore Tools →
