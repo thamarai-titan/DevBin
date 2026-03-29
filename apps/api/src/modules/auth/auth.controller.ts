@@ -3,6 +3,7 @@ import { LoginSchema, RegisterSchema, type LoginType, type RegisterType } from "
 import { checkEmail, LoginService, RegisterService } from "./auth.service"
 import { responses } from "../../lib/responses"
 import { SignJwt } from "../../lib/utils"
+import jwt from "jsonwebtoken"
 
 export const RegisterController = async (req:Request, res:Response)=> {
     try {
@@ -53,5 +54,34 @@ export const LoginController = async (req:Request, res:Response) => {
         }
 
         return res.status(500).json(responses.error("INTERNEL_SERVER_ERROR"))
+    }
+}
+
+export const MeController = async (req: Request, res: Response) => {
+    try {
+        const token = req.headers.authorization?.split(" ")[1] as string
+        const userId = req.userId
+        const role = req.role
+
+        if(!token){
+            return res.status(401).json(responses.error("UNAUTHORIZED"))
+        }
+
+        const decoded = jwt.verify(token, process.env.SECRET_KEY!) as {
+            userId: string,
+            role: string
+        }
+
+        if(decoded.userId !== userId || decoded.role !== role){
+            return res.status(401).json(responses.error("UNAUTHORIZED"))
+        }
+
+        return res.status(200).json(responses.success({
+            userId,
+            role
+        }))
+    }
+    catch (error) {
+        return res.status(401).json(responses.error("UNAUTHORIZED"))
     }
 }
