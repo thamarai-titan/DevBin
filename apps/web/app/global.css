@@ -24,10 +24,10 @@
 }
 
 :root {
-  --color-bg:       #0a0812;   /* page background */
-  --color-card:     #0f0c18;   /* card surface */
-  --color-border:   #1a1624;   /* all borders */
-  --color-muted:    #6b5f8a;   /* descriptions, secondary text */
-  --color-text:     #f5f0ff;   /* headings, primary text */
-  --color-accent:   #f6fa1a;   /* THE yellow — buttons, eyebrows, highlights */
+  --color-bg:       #000000; /* True Black */
+  --color-card:     #111111; /* Carbon Grey */
+  --color-border:   #222222; /* Steel Border */
+  --color-muted:    #888888; /* Neutral Grey */
+  --color-text:     #ffffff; /* Pure White */
+  --color-accent:   #f6fa1a; /* Soft Silver (Minimalist) */
 }
