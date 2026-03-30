@@ -1,7 +1,7 @@
 const trendingTools = [
-  { rank: "01", logo: "🧹", name: "JSON Formatter", desc: "Format, validate and beautify JSON data instantly with syntax highlighting and error detection.", tags: ["json", "formatter", "validator"], clicks: "24.3k", growth: "↑ 38%", rating: "4.9", barClass: "bg-[#f6fa1a]", leftBorder: "bg-[#f6fa1a]" },
-  { rank: "02", logo: "🎨", name: "Color Palette",  desc: "Generate stunning color palettes from a single hex code. Export to CSS, Tailwind, Figma tokens.", tags: ["color", "design", "css"],          clicks: "18.1k", growth: "↑ 21%", rating: "4.7", barClass: "bg-[#f6fa1a]/40", leftBorder: "bg-[#f6fa1a]/30" },
-  { rank: "03", logo: "🔐", name: "Base64 Encoder", desc: "Encode and decode Base64 strings, files and images in your browser. Zero server calls.",          tags: ["encoder", "security", "utils"],     clicks: "11.8k", growth: "↑ 14%", rating: "4.8", barClass: "bg-[#f6fa1a]/15", leftBorder: "bg-[#f6fa1a]/10" },
+  { rank: "01", logo: "🧹", name: "JSON Formatter", desc: "Format, validate and beautify JSON data instantly with syntax highlighting and error detection.", tags: ["json", "formatter", "validator"], clicks: "24.3k", growth: "↑ 38%", rating: "4.9", barClass: "bg-(--color-accent)", leftBorder: "bg-(--color-accent)" },
+  { rank: "02", logo: "🎨", name: "Color Palette",  desc: "Generate stunning color palettes from a single hex code. Export to CSS, Tailwind, Figma tokens.", tags: ["color", "design", "css"],          clicks: "18.1k", growth: "↑ 21%", rating: "4.7", barClass: "bg-(--color-accent)/40", leftBorder: "bg-(--color-accent)/30" },
+  { rank: "03", logo: "🔐", name: "Base64 Encoder", desc: "Encode and decode Base64 strings, files and images in your browser. Zero server calls.",          tags: ["encoder", "security", "utils"],     clicks: "11.8k", growth: "↑ 14%", rating: "4.8", barClass: "bg-(--color-accent)/15", leftBorder: "bg-(--color-accent)/10" },
 ]
 
 export const TrendingSection = () => {
@@ -14,25 +14,25 @@ export const TrendingSection = () => {
           <div>
             <div className="flex items-center gap-2 mb-3">
               <span className="w-1.5 h-1.5 rounded-full bg-(--color-accent) animate-pulse" />
-              <span className="font-mono text-[9px] tracking-[2.5px] uppercase text-[#f6fa1a]">
+              <span className="font-mono text-[9px] tracking-[2.5px] uppercase text-(--color-accent)">
                 This week
               </span>
             </div>
-            <h2 className="font-syne text-3xl md:text-[42px] font-extrabold text-[#f5f0ff] tracking-[-2px] leading-none">
+            <h2 className="font-syne text-3xl md:text-[42px] font-extrabold text-(--color-text) tracking-[-2px] leading-none">
               Trending Tools
             </h2>
           </div>
-          <span className="font-mono text-[9px] tracking-[2px] uppercase text-(--color-muted) border-b border-(--color-border) pb-0.5 cursor-pointer hover:text-[#f6fa1a] hover:border-[#f6fa1a] transition-colors hidden sm:block">
+          <span className="font-mono text-[9px] tracking-[2px] uppercase text-(--color-muted) border-b border-(--color-border) pb-0.5 cursor-pointer hover:text-(--color-bg) hover:border-(--color-accent) transition-colors hidden sm:block">
             View all tools →
           </span>
         </div>
 
         {/* cards */}
-        <div className="flex flex-col gap-px bg-[#1a1624] rounded-xl overflow-hidden">
+        <div className="flex flex-col gap-px bg-(--color-card) rounded-xl overflow-hidden">
           {trendingTools.map((tool, i) => (
             <div
               key={i}
-              className="group relative bg-(--color-bg) hover:bg-[#0f0c18] transition-colors duration-200 cursor-pointer"
+              className="group relative bg-(--color-bg) hover:bg-(--color-border) transition-colors duration-200 cursor-pointer"
             >
               {/* left accent bar */}
               <div className={`absolute left-0 top-0 bottom-0 w-0.5 ${tool.leftBorder}`} />
@@ -45,11 +45,11 @@ export const TrendingSection = () => {
                       {tool.rank}
                     </span>
                     <span className="text-xl">{tool.logo}</span>
-                    <span className="font-syne text-lg font-extrabold text-[#f5f0ff] tracking-tight">
+                    <span className="font-syne text-lg font-extrabold text-(--color-text) tracking-tight">
                       {tool.name}
                     </span>
                   </div>
-                  <span className="font-mono text-[9px] text-[#f6fa1a] tracking-wide opacity-0 group-hover:opacity-100 transition-all duration-200">
+                  <span className="font-mono text-[9px] text-(--color-accent) tracking-wide opacity-0 group-hover:opacity-100 transition-all duration-200">
                     →
                   </span>
                 </div>
@@ -68,12 +68,12 @@ export const TrendingSection = () => {
                   </div>
                   <div className="flex gap-4">
                     <div className="flex flex-col items-end gap-0.5">
-                      <span className="font-syne text-sm font-bold text-[#f6fa1a]">{tool.growth}</span>
-                      <span className="font-mono text-[8px] tracking-[1.5px] uppercase text-[#2a2238]">This week</span>
+                      <span className="font-syne text-sm font-bold text-(--color-accent)">{tool.growth}</span>
+                      <span className="font-mono text-[8px] tracking-[1.5px] uppercase text-(--color-text)">This week</span>
                     </div>
                     <div className="flex flex-col items-end gap-0.5">
-                      <span className="font-syne text-sm font-bold text-[#f5f0ff]">{tool.clicks}</span>
-                      <span className="font-mono text-[8px] tracking-[1.5px] uppercase text-[#2a2238]">Clicks</span>
+                      <span className="font-syne text-sm font-bold text-(--color-accent)">{tool.clicks}</span>
+                      <span className="font-mono text-[8px] tracking-[1.5px] uppercase text-(--color-text)">Clicks</span>
                     </div>
                   </div>
                 </div>
@@ -84,7 +84,7 @@ export const TrendingSection = () => {
 
                 {/* rank */}
                 <div className="flex flex-col items-center gap-2">
-                  <span className="font-syne text-[52px] font-extrabold text-transparent [-webkit-text-stroke:1px_#6b5f8a] group-hover:[-webkit-text-stroke-color:#f6fa1a] transition-all leading-none tracking-[-3px]">
+                  <span className="font-syne text-[52px] font-extrabold text-transparent [-webkit-text-stroke:1px_#ededed] group-hover:[-webkit-text-stroke-color:#ededed transition-all leading-none tracking-[-3px]">
                     {tool.rank}
                   </span>
                   <div className={`w-0.5 h-8 rounded-full ${tool.barClass}`} />
@@ -94,7 +94,7 @@ export const TrendingSection = () => {
                 <div className="flex flex-col gap-2">
                   <div className="flex items-center gap-3">
                     <span className="text-2xl">{tool.logo}</span>
-                    <span className="font-syne text-xl font-extrabold text-[#f5f0ff] tracking-[-0.5px]">
+                    <span className="font-syne text-xl font-extrabold text-(--color-text) tracking-[-0.5px]">
                       {tool.name}
                     </span>
                   </div>
@@ -119,7 +119,7 @@ export const TrendingSection = () => {
                       { val: `★ ${tool.rating}`,  key: "Rating",    yellow: false },
                     ].map((s) => (
                       <div key={s.key} className="flex flex-col items-end gap-0.5">
-                        <span className={`font-syne text-lg font-bold tracking-tight ${s.yellow ? "text-[#f6fa1a]" : "text-[#f5f0ff]"}`}>
+                        <span className={`font-syne text-lg font-bold tracking-tight ${s.yellow ? "text-(--color-accent)" : "text-(--color-text)"}`}>
                           {s.val}
                         </span>
                         <span className="font-mono text-[8px] tracking-[1.5px] uppercase text-[#2a2238]">
@@ -128,7 +128,7 @@ export const TrendingSection = () => {
                       </div>
                     ))}
                   </div>
-                  <span className="font-mono text-[9px] text-[#f6fa1a] tracking-wide opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all duration-200">
+                  <span className="font-mono text-[9px] text-(--color-text) tracking-wide opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all duration-200">
                     Open →
                   </span>
                 </div>
@@ -140,7 +140,7 @@ export const TrendingSection = () => {
 
         {/* mobile view all — shown only on small screens */}
         <div className="mt-6 flex justify-center sm:hidden">
-          <span className="font-mono text-[9px] tracking-[2px] uppercase text-(--color-muted) border-b border-(--color-border) pb-0.5 cursor-pointer hover:text-[#f6fa1a] hover:border-[#f6fa1a] transition-colors">
+          <span className="font-mono text-[9px] tracking-[2px] uppercase text-(--color-muted) border-b border-(--color-border) pb-0.5 cursor-pointer hover:text-(--color-accent) hover:border-(--color-accent) transition-colors">
             View all tools →
           </span>
         </div>
