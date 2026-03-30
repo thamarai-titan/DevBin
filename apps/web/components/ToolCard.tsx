@@ -4,7 +4,7 @@ import {motion} from "motion/react"
 
 export const ToolCard = ({tool,index}: ToolCardProps) => {
     return (
-       <motion.div className="bg-(--color-card) border-r border-b border-(--color-border) p-6 hover:bg-[#111018] transition-colors duration-200 cursor-pointer">
+       <motion.div className="bg-(--color-card) border-r border-b border-(--color-border) p-6 hover:bg-(--color-border) transition-colors duration-200 cursor-pointer">
   
   {/* top row */}
   <div className="flex justify-between items-start mb-5">
@@ -37,7 +37,7 @@ export const ToolCard = ({tool,index}: ToolCardProps) => {
   </div>
 
   {/* footer */}
-  <div className="flex justify-between items-center pt-4 border-t border-[#1a1820]">
+  <div className="flex justify-between items-center pt-4 border-t border-(--color-border)">
     <span className="text-xs font-semibold text-(--color-accent)">★ {tool.rating}</span>
     <span className="text-[9px] tracking-[1.5px] uppercase text-(--color-muted) font-mono">{tool.category}</span>
   </div>
