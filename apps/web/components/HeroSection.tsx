@@ -92,11 +92,11 @@ export const HeroSection = () => {
                     transition={{ duration: 0.5, delay: 0.4 }}
                     className="flex items-center gap-8 pt-2 "
                 >
-                    <button className="font-mono text-[11px] tracking-[1.5px] uppercase bg-[#c8cc00] text-(--color-border) px-7 py-3.5 rounded hover:opacity-85 transition-opacity">
+                    <button className="font-mono text-[11px] tracking-[1.5px] uppercase bg-(--color-accent) text-(--color-bg) px-7 py-3.5 rounded hover:opacity-85 transition-opacity">
                         Explore Tools →
                     </button>
                     <div className="flex items-center gap-3 font-mono text-[10px] tracking-[1.5px] uppercase text-(--color-text)">
-                        <div className="w-8 h-px bg-[#2e2a3a]" />
+                        <div className="w-8 h-px bg-(--color-muted)" />
                         Scroll to explore
                     </div>
                 </motion.div>
