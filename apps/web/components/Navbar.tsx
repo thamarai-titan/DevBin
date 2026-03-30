@@ -34,7 +34,7 @@ export const Navbar = () => {
         <div className="flex items-center justify-between border border-(--color-border) backdrop-blur-xl px-6 py-3.5 rounded-lg">
           
           {/* logo */}
-          <span className="font-syne text-[17px] font-extrabold tracking-tight text-[#f5f2ff]">
+          <span className="font-syne text-[17px] font-extrabold tracking-tight text-(--color-text)">
             Dev<span className="">B</span>in.
           </span>
 
